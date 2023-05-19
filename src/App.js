@@ -8,8 +8,8 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route path="/carteira" component={ Wallet } />
+        <Route exact path="/trybewallet" component={ Login } />
+        <Route path="/trybewallet/carteira" component={ Wallet } />
         <Route component={ NotFound } />
       </Switch>
     );
