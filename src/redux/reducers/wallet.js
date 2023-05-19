@@ -5,6 +5,7 @@ import {
   EDIT_REGISTER,
   NEWEDITED_REGISTER,
   ADD_CURRENCIES,
+  ACTION_TESTE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: 0,
   cotationCurrence: [],
+  teste: [],
 };
 
 function wallet(state = INITIAL_STATE, action) {
@@ -48,11 +50,14 @@ function wallet(state = INITIAL_STATE, action) {
       idToEdit: 0,
       expenses: action.teste,
     };
+  case ACTION_TESTE:
+    return {
+      ...state,
+      teste: action.teste123,
+    };
   default:
     return state;
   }
 }
 
 export default wallet;
-
-// state.filter((register) => register !== action.value);

@@ -5,18 +5,12 @@ export const ADD_REGISTER = 'ADD_REGISTER';
 export const DELETE_REGISTER = 'DELETE_REGISTER';
 export const EDIT_REGISTER = 'EDIT_REGISTER';
 export const NEWEDITED_REGISTER = 'NEWEDITED_REGISTER';
+export const ACTION_TESTE = 'ACTION_TESTE';
 export const ADD_CURRENCIES = 'ADD_CURRENCIES';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const ADD_EDITED_EXPENSES = 'ADD_EDITED_EXPENSES';
 
-// {
-//     user: {
-//       email: '', // string que armazena o email da pessoa usuária
-//     },
-//     wallet: {
-//       currencies: [], // array de string
-//       expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
-//       editor: false, // valor booleano que indica de uma despesa está sendo editada
-//       idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
-//     }
+const URL_API = 'https://economia.awesomeapi.com.br/json/all';
 
 export const searchSuccess = (data) => ({
   type: SEARCH_SUCCESS,
@@ -42,9 +36,26 @@ export const editRegister = (id) => ({ type: EDIT_REGISTER, id });
 
 export const newEditedRegister = (teste) => ({ type: NEWEDITED_REGISTER, teste });
 
+export const actionTeste = (teste123) => ({ type: ACTION_TESTE, teste123 });
+
+// export const addCurrencies = (currencies) => ({
+//   type: ADD_CURRENCIES,
+//   currencies,
+// });
+
+// export const addExpenses = (expenses) => ({
+//   type: ADD_EXPENSES,
+//   expenses,
+// });
+
+// export const addEditedExpenses = (editExpenses) => ({
+//   type: ADD_EDITED_EXPENSES,
+//   editExpenses,
+// });
+
 export const fetchApi = () => async (dispatch) => {
   try {
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const response = await fetch(URL_API);
     const data = await response.json();
     dispatch(searchSuccess(data));
     dispatch(addcurrencies(data));
@@ -52,3 +63,21 @@ export const fetchApi = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+// export const fetchApiCurrencies = () => async (dispatch) => {
+//   const response = await fetch(URL_API);
+//   const data = await response.json();
+//   dispatch(addCurrencies(data));
+// };
+
+// export const fetchApiExpenses = (expense) => async (dispatch) => {
+//   const response = await fetch(URL_API);
+//   const data = await response.json();
+//   dispatch(addExpenses({ ...expense, exchangeRates: data }));
+// };
+
+// export const fetchApiEditdExpenses = (expense) => async (dispatch) => {
+//   const response = await fetch(URL_API);
+//   const data = await response.json();
+//   dispatch(addEditedExpenses({ ...expense, exchangeRates: data }));
+// };

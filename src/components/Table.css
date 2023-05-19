@@ -1,0 +1,64 @@
+th, td {
+    padding: 0.4rem;
+    text-align: center;
+  
+    border-bottom: 1px solid #ddd;
+  }
+  
+  thead tr th {
+    font-weight: bolder;
+  }
+  
+  tbody tr:hover {
+    background-color: #0caad14f;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #edit-btn {
+    margin-right: 1rem;
+  }
+  
+  #edit-btn, #delete-btn {
+    width: auto;
+    height: auto;
+  
+    cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

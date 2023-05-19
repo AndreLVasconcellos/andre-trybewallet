@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchApi, addRegister, newEditedRegister } from '../redux/actions';
+import './WalletForm.css';
 
 const INITIAL_STATE = {
   id: 0,
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
   method: 'Dinheiro',
   tag: 'Alimentação',
   exchangeRates: {},
+  button: true,
 };
 
 class WalletForm extends Component {
@@ -21,8 +23,13 @@ class WalletForm extends Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    });
+    }, this.validInput);
     this.setState({ exchangeRates: cotationCurrence });
+  };
+
+  validInput = () => {
+    const { value, description } = this.state;
+    if (Number(value) > 0 && description) this.setState({ button: false });
   };
 
   handleClickRegister = async () => {
@@ -56,6 +63,7 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
+      button: true,
     });
   };
 
@@ -80,6 +88,11 @@ class WalletForm extends Component {
     });
 
     dispatch(newEditedRegister(objEdit));
+    this.setState({
+      value: '',
+      description: '',
+      button: true,
+    });
   };
 
   render() {
@@ -90,30 +103,41 @@ class WalletForm extends Component {
     console.log(idToEdit);
     console.log(editor);
     return (
-      <form>
-        <label htmlFor="value-input">
+      <nav className="navbar navbar-light bg-light px-4 align-items-center">
+        <label
+          htmlFor="value-input"
+          className="col mx-2 d-flex align-items-center justify-content-center"
+        >
           Valor:
           <input
             type="number"
             id="value-imput"
+            className="form-control"
             name="value"
             onChange={ this.handleChange }
             data-testid="value-input"
             value={ value }
           />
         </label>
-        <label htmlFor="description-input">
+        <label
+          htmlFor="description-input"
+          className="col mx-2 d-flex align-items-center justify-content-center"
+        >
           Descrição:
           <input
             type="text"
             id="description-input"
+            className="form-control"
             name="description"
             onChange={ this.handleChange }
             data-testid="description-input"
             value={ description }
           />
         </label>
-        <label htmlFor="currencies">
+        <label
+          htmlFor="currencies"
+          className="mx-2 d-flex align-items-center justify-content-center"
+        >
           Moeda:
           <select
             id="currencies"
@@ -121,12 +145,16 @@ class WalletForm extends Component {
             name="currency"
             data-testid="currency-input"
             value={ currency }
+            className="custom-select mr-sm-2"
           >
             {currencies
-              .map((elemen) => (<option key={ elemen }>{elemen}</option>))}
+              .map((e) => (<option key={ e }>{e}</option>))}
           </select>
         </label>
-        <label htmlFor="method-input">
+        <label
+          htmlFor="method-input"
+          className="col mx-2 d-flex align-items-center justify-content-center"
+        >
           Metódo de pagamento:
           <select
             id="method-input"
@@ -134,6 +162,7 @@ class WalletForm extends Component {
             onChange={ this.handleChange }
             name="method"
             value={ method }
+            className="custom-select mr-2"
           >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
@@ -141,7 +170,10 @@ class WalletForm extends Component {
           </select>
         </label>
 
-        <label htmlFor="tag-input">
+        <label
+          htmlFor="tag-input"
+          className="col mx-2 d-flex align-items-center justify-content-center"
+        >
           Tag:
           <select
             id="tag-input"
@@ -149,6 +181,7 @@ class WalletForm extends Component {
             onChange={ this.handleChange }
             name="tag"
             value={ tag }
+            className="custom-select mr-sm-2"
           >
             <option>Alimentação</option>
             <option>Lazer</option>
@@ -159,25 +192,31 @@ class WalletForm extends Component {
         </label>
 
         {editor ? (
-          <button
-            type="button"
-            disabled={ button }
-            id="wallet-button"
-            onClick={ this.editExpenseFunc }
-          >
-            Editar Despesa
-          </button>
+          <div className="mx-2 d-flex align-items-center justify-content-center">
+            <button
+              type="button"
+              disabled={ button }
+              id="wallet-button"
+              onClick={ this.editExpenseFunc }
+              className="btn btn-primary mx-2"
+            >
+              Editar despesa
+            </button>
+          </div>
         ) : (
-          <button
-            type="button"
-            disabled={ button }
-            id="wallet-button"
-            onClick={ this.handleClickRegister }
-          >
-            Adicionar despesa
-          </button>
+          <div className="mx-2 d-flex align-items-center justify-content-center">
+            <button
+              type="button"
+              disabled={ button }
+              id="wallet-button"
+              onClick={ this.handleClickRegister }
+              className="btn btn-danger mx-2"
+            >
+              Adicionar despesa
+            </button>
+          </div>
         )}
-      </form>
+      </nav>
     );
   }
 }

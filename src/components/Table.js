@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteRegister, editRegister } from '../redux/actions';
+import './Table.css';
 
 class Table extends Component {
   render() {
     const { expenses, dispatch } = this.props;
     return (
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead-dark">
           <tr>
             <th>Descrição</th>
             <th>Tag</th>
@@ -40,15 +41,17 @@ class Table extends Component {
                     data-testid="edit-btn"
                     id="edit-btn"
                     onClick={ () => dispatch(editRegister(id)) }
+                    className="btn btn-primary"
                   >
-                    edit
+                    <i className="bi bi-pencil-square" />
                   </button>
                   <button
                     data-testid="delete-btn"
                     id="delete-btn"
                     onClick={ () => dispatch(deleteRegister(id)) }
+                    className="btn btn-danger mx-2"
                   >
-                    delete
+                    <i className="bi bi-trash-fill" />
                   </button>
                 </td>
               </tr>
